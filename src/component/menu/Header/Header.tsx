@@ -24,8 +24,10 @@ import { useStyles } from './Header.styles';
 import classNames from 'classnames';
 import { useId } from 'hooks/useId';
 import { IRoute } from 'interfaces/route';
+import { useTranslation } from 'react-i18next';
 
 const Header: VFC = () => {
+    const { t } = useTranslation() 
     const theme = useTheme();
     const adminId = useId();
     const configId = useId();
@@ -114,10 +116,7 @@ const Header: VFC = () => {
                     )}
                     aria-label="Home"
                 >
-                    <UnleashLogo
-                        className={styles.logo}
-                        aria-label="Unleash logo"
-                    />
+                { t('company') }  
                 </Link>
                 <nav className={styles.nav}>
                     <div className={styles.links}>

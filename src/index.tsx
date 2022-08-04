@@ -13,6 +13,7 @@ import { FeedbackCESProvider } from 'component/feedback/FeedbackCESContext/Feedb
 import UIProvider from 'component/providers/UIProvider/UIProvider';
 import { AnnouncerProvider } from 'component/common/Announcer/AnnouncerProvider/AnnouncerProvider';
 import { InstanceStatus } from 'component/common/InstanceStatus/InstanceStatus';
+import 'translations/i18n';
 
 ReactDOM.render(
     <UIProvider>
