@@ -19,6 +19,7 @@ import { CREATE_FEATURE } from 'component/providers/AccessProvider/permissions';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { useAuthPermissions } from 'hooks/api/getters/useAuth/useAuthPermissions';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureToggleForm {
     type: string;
@@ -58,6 +59,7 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
     mode,
     clearErrors,
 }) => {
+    const { t } = useTranslation()
     const { classes: styles } = useStyles();
     const { featureTypes } = useFeatureTypes();
     const navigate = useNavigate();
@@ -72,7 +74,7 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
         <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.container}>
                 <p className={styles.inputDescription}>
-                    What would you like to call your toggle?
+                    What would you like to call your {t('feature.singular')}?
                 </p>
                 <Input
                     autoFocus
@@ -89,7 +91,7 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
                     onBlur={validateToggleName}
                 />
                 <p className={styles.inputDescription}>
-                    What kind of feature toggle do you want?
+                    What kind of {t('feature.singular')} do you want?
                 </p>
                 <FeatureTypeSelect
                     value={type}
@@ -108,7 +110,7 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
                     condition={editable}
                     show={
                         <p className={styles.inputDescription}>
-                            In which project do you want to save the toggle?
+                            In which {t('project.singular')} do you want to save the {t('feature.singular')}?
                         </p>
                     }
                 />
@@ -127,14 +129,14 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
                 />
 
                 <p className={styles.inputDescription}>
-                    How would you describe your feature toggle?
+                    How would you describe your {t('feature.singular')}?
                 </p>
                 <Input
                     className={styles.input}
                     multiline
                     rows={4}
                     label="Description"
-                    placeholder="A short description of the feature toggle"
+                    placeholder={`A short description of the ${t('feature.singular')}`}
                     value={description}
                     data-testid={CF_DESC_ID}
                     onChange={e => setDescription(e.target.value)}
@@ -149,9 +151,9 @@ const FeatureForm: React.FC<IFeatureToggleForm> = ({
                         Impression Data
                     </Typography>
                     <p>
-                        When you enable impression data for a feature toggle,
+                        When you enable impression data for a {t('feature.singular')},
                         your client SDKs will emit events you can listen for
-                        every time this toggle gets triggered. Learn more in{' '}
+                        every time this {t('feature.singular')} gets triggered. Learn more in{' '}
                         <a
                             target="_blank"
                             rel="noopener noreferrer"

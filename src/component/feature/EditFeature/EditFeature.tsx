@@ -12,8 +12,10 @@ import useToast from 'hooks/useToast';
 import { formatUnknownError } from 'utils/formatUnknownError';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
 import { GO_BACK } from 'constants/navigate';
+import { useTranslation } from 'react-i18next';
 
 const EditFeature = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
     const { setToastData, setToastApiError } = useToast();
@@ -57,7 +59,7 @@ const EditFeature = () => {
             await patchFeatureToggle(project, featureId, patch);
             navigate(`/projects/${project}/features/${name}`);
             setToastData({
-                title: 'Toggle updated successfully',
+                title: `${ t('feature.singular') } updated successfully`,
                 type: 'success',
             });
         } catch (error: unknown) {
@@ -81,11 +83,11 @@ const EditFeature = () => {
     return (
         <FormTemplate
             loading={loading}
-            title="Edit Feature toggle"
-            description="Feature toggles support different use cases, each with their own specific needs such as simple static routing or more complex routing.
-            The feature toggle is disabled when created and you decide when to enable"
+            title={`Edit ${t('feature.singular')}`}
+            description={`${t('feature.title')} support different use cases, each with their own specific needs such as simple static routing or more complex routing.
+            The ${t('feature.sigular')} is disabled when created and you decide when to enable`}
             documentationLink="https://docs.getunleash.io/advanced/feature_toggle_types"
-            documentationLinkLabel="Feature toggle types documentation"
+            documentationLinkLabel={`${t('feature.title')} documentation`}
             formatApiCode={formatApiCode}
         >
             <FeatureForm

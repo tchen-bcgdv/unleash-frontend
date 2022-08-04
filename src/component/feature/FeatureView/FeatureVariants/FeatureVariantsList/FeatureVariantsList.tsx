@@ -34,8 +34,10 @@ import { PayloadOverridesCell } from './PayloadOverridesCell/PayloadOverridesCel
 import { TextCell } from 'component/common/Table/cells/TextCell/TextCell';
 import theme from 'themes/theme';
 import { VariantsActionCell } from './VariantsActionsCell/VariantsActionsCell';
+import { useTranslation } from 'react-i18next';
 
 export const FeatureVariantsList = () => {
+    const { t } = useTranslation()
     const { hasAccess } = useContext(AccessContext);
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
@@ -411,8 +413,8 @@ export const FeatureVariantsList = () => {
             }
         >
             <Alert severity="info" sx={{ marginBottom: '1rem' }}>
-                Variants allows you to return a variant object if the feature
-                toggle is considered enabled for the current request. When using
+                Variants allows you to return a variant object if the {t('feature.singular')} 
+                is considered enabled for the current request. When using
                 variants you should use the{' '}
                 <code style={{ fontWeight: 'bold' }}>getVariant()</code> method
                 in the Client SDK.

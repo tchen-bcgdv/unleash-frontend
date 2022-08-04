@@ -1,3 +1,15 @@
 export const TRANSLATIONS_FL= {
-    company: "Fastlane"
+    company: "DAP Fastlane",
+    project: {
+        singular: 'campaign',
+        singular_title: 'Campaign',
+        plural: 'campaigns',
+        plural_title: 'Campaigns'
+    },
+    feature: {
+        singular: 'experiment',
+        singular_title: 'Experiment',
+        plural: 'experiments',
+        plural_title: 'Experiments'
+    }
 }

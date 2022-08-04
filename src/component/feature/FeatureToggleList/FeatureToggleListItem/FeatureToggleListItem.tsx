@@ -17,6 +17,7 @@ import PermissionIconButton from 'component/common/PermissionIconButton/Permissi
 import { FeatureSchema } from 'openapi';
 import { styles as themeStyles } from 'component/common';
 import { useStyles } from './styles';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureToggleListItemProps {
     feature: FeatureSchema;
@@ -40,6 +41,7 @@ export const FeatureToggleListItem = memo<IFeatureToggleListItemProps>(
         className,
         ...rest
     }) => {
+        const { t } = useTranslation()
         const { classes: styles } = useStyles();
 
         const { projects } = useProjects();
@@ -196,7 +198,7 @@ export const FeatureToggleListItem = memo<IFeatureToggleListItemProps>(
                                 !projectExists()
                             }
                             onClick={reviveFeature}
-                            tooltipProps={{ title: 'Revive feature toggle' }}
+                            tooltipProps={{ title: `Revive ${t('feature.singular')}` }}
                         >
                             <Undo />
                         </PermissionIconButton>

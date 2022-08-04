@@ -30,8 +30,10 @@ import StatusChip from 'component/common/StatusChip/StatusChip';
 import { FeatureNotFound } from 'component/feature/FeatureView/FeatureNotFound/FeatureNotFound';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
 import { FeatureArchiveDialog } from '../../common/FeatureArchiveDialog/FeatureArchiveDialog';
+import { useTranslation } from 'react-i18next';
 
 export const FeatureView = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
     const { refetch: projectRefetch } = useProject(projectId);
@@ -108,7 +110,7 @@ export const FeatureView = () => {
                                     component={Link}
                                     to={`/projects/${projectId}/features/${featureId}/strategies/copy`}
                                     tooltipProps={{
-                                        title: 'Copy feature toggle',
+                                        title: `Copy ${ t('feature.singular')}`,
                                     }}
                                 >
                                     <FileCopy />
@@ -117,7 +119,7 @@ export const FeatureView = () => {
                                     permission={DELETE_FEATURE}
                                     projectId={projectId}
                                     tooltipProps={{
-                                        title: 'Archive feature toggle',
+                                        title: `Archive ${ t('feature.singular')}`,
                                     }}
                                     data-loading
                                     onClick={() => setShowDelDialog(true)}
@@ -129,7 +131,7 @@ export const FeatureView = () => {
                                     permission={UPDATE_FEATURE}
                                     projectId={projectId}
                                     tooltipProps={{
-                                        title: 'Toggle stale state',
+                                        title: `${ t('feature.singular')} stale state`,
                                     }}
                                     data-loading
                                 >

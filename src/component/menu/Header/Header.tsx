@@ -124,7 +124,7 @@ const Header: VFC = () => {
                             Projects
                         </Link>
                         <Link to="/features" className={themeStyles.focusable}>
-                            Feature toggles
+                            { t('feature.plural_title')}
                         </Link>
                         <Link
                             to="/playground"

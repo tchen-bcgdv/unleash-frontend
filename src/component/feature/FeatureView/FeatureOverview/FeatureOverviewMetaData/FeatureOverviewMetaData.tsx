@@ -11,8 +11,10 @@ import { UPDATE_FEATURE } from 'component/providers/AccessProvider/permissions';
 import useTags from 'hooks/api/getters/useTags/useTags';
 import FeatureOverviewTags from './FeatureOverviewTags/FeatureOverviewTags';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 const FeatureOverviewMetaData = () => {
+    const { t } = useTranslation()
     const { classes: styles } = useStyles();
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
@@ -28,12 +30,12 @@ const FeatureOverviewMetaData = () => {
                 <div className={styles.metaDataHeader} data-loading>
                     <IconComponent className={styles.headerIcon} />{' '}
                     <h2 className={styles.header}>
-                        {capitalize(type || '')} toggle
+                        {capitalize(type || '')}
                     </h2>
                 </div>
                 <div className={styles.body}>
                     <span className={styles.bodyItem} data-loading>
-                        Project: {project}
+                        {t('project.singular_title')}: {project}
                     </span>
                     <ConditionallyRender
                         condition={Boolean(description)}

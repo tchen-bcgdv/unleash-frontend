@@ -5,6 +5,7 @@ import { useFeature } from 'hooks/api/getters/useFeature/useFeature';
 import PermissionIconButton from 'component/common/PermissionIconButton/PermissionIconButton';
 import { UPDATE_FEATURE } from 'component/providers/AccessProvider/permissions';
 import { useStyles } from './FeatureSettingsInformation.style';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureSettingsInformationProps {
     projectId: string;
@@ -15,6 +16,7 @@ export const FeatureSettingsInformation = ({
     projectId,
     featureId,
 }: IFeatureSettingsInformationProps) => {
+    const { t } = useTranslation()
     const { classes: styles } = useStyles();
     const { feature } = useFeature(projectId, featureId);
     const navigate = useNavigate();
@@ -27,7 +29,7 @@ export const FeatureSettingsInformation = ({
         <>
             <div className={styles.container}>
                 <Typography className={styles.header}>
-                    Feature information
+                    {t('feature.singular_title')} information
                 </Typography>
                 <PermissionIconButton
                     permission={UPDATE_FEATURE}

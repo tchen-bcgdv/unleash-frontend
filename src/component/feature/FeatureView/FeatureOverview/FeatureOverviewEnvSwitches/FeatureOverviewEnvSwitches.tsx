@@ -6,8 +6,10 @@ import EnvironmentStrategyDialog from 'component/common/EnvironmentStrategiesDia
 import FeatureOverviewEnvSwitch from './FeatureOverviewEnvSwitch/FeatureOverviewEnvSwitch';
 import { useStyles } from './FeatureOverviewEnvSwitches.styles';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 const FeatureOverviewEnvSwitches = () => {
+    const { t }  = useTranslation()
     const { classes: styles } = useStyles();
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
@@ -40,10 +42,10 @@ const FeatureOverviewEnvSwitches = () => {
         <div className={styles.container}>
             <Tooltip
                 arrow
-                title="Environments can be switched off for a single toggle. Resulting in all calls towards the toggle to return false."
+                title={`Environments can be switched off for a single ${t('feature.singular')}. Resulting in all calls towards the ${t('feature.singular')} to return false.`}
             >
                 <h3 className={styles.header} data-loading>
-                    Feature toggle status
+                    {t('feature.singular_title')} status
                 </h3>
             </Tooltip>
             {renderEnvironmentSwitches()}

@@ -12,8 +12,10 @@ import UIContext from 'contexts/UIContext';
 import { CF_CREATE_BTN_ID } from 'utils/testIds';
 import { formatUnknownError } from 'utils/formatUnknownError';
 import { GO_BACK } from 'constants/navigate';
+import { useTranslation } from 'react-i18next';
 
 const CreateFeature = () => {
+    const { t } = useTranslation();
     const { setToastData, setToastApiError } = useToast();
     const { setShowFeedback } = useContext(UIContext);
     const { uiConfig } = useUiConfig();
@@ -49,8 +51,8 @@ const CreateFeature = () => {
                 await createFeatureToggle(project, payload);
                 navigate(`/projects/${project}/features/${name}`);
                 setToastData({
-                    title: 'Toggle created successfully',
-                    text: 'Now you can start using your toggle.',
+                    title: `${t('feature.singular')} created successfully`,
+                    text: `Now you can start using your ${t('feature.singular')}.`,
                     confetti: true,
                     type: 'success',
                 });
@@ -77,11 +79,10 @@ const CreateFeature = () => {
     return (
         <FormTemplate
             loading={loading}
-            title="Create feature toggle"
-            description="Feature toggles support different use cases, each with their own specific needs such as simple static routing or more complex routing.
-            The feature toggle is disabled when created and you decide when to enable"
+            title={"Create " + t('feature.singular')}
+            description={`${t('feature.plural_title')} support different use cases, each with their own specific needs such as simple static routing or more complex routing. The ${t('feature.singular')} is disabled when created and you decide when to enable`}
             documentationLink="https://docs.getunleash.io/advanced/feature_toggle_types"
-            documentationLinkLabel="Feature toggle types documentation"
+            documentationLinkLabel={`${t('feature.plural_title')} documentation`}
             formatApiCode={formatApiCode}
         >
             <FeatureForm
@@ -103,7 +104,7 @@ const CreateFeature = () => {
                 clearErrors={clearErrors}
             >
                 <CreateButton
-                    name="feature toggle"
+                    name={t('feature.singular')}
                     permission={CREATE_FEATURE}
                     projectId={project}
                     data-testid={CF_CREATE_BTN_ID}

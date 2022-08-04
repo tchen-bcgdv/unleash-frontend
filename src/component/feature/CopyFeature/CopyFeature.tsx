@@ -18,8 +18,10 @@ import { getTogglePath } from 'utils/routePathHelpers';
 import useFeatureApi from 'hooks/api/actions/useFeatureApi/useFeatureApi';
 import { useFeature } from 'hooks/api/getters/useFeature/useFeature';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 export const CopyFeatureToggle = () => {
+    const { t } = useTranslation()
     const [replaceGroupId, setReplaceGroupId] = useState(true);
     const [apiError, setApiError] = useState('');
     const [nameError, setNameError] = useState<string | undefined>();
@@ -86,12 +88,12 @@ export const CopyFeatureToggle = () => {
             />
             <section className={styles.content}>
                 <p className={styles.text}>
-                    You are about to create a new feature toggle by cloning the
-                    configuration of feature toggle&nbsp;
+                    You are about to create a new { t('feature.singular') } by cloning the
+                    configuration of { t('feature.singular') }&nbsp;
                     <Link to={getTogglePath(projectId, featureId)}>
                         {featureId}
                     </Link>
-                    . You must give the new feature toggle a unique name before
+                    . You must give the new { t('feature.singular') } a unique name before
                     you can proceed.
                 </p>
                 <form onSubmit={onSubmit}>

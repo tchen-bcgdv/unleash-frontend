@@ -7,6 +7,7 @@ import { ConditionallyRender } from 'component/common/ConditionallyRender/Condit
 import { NAVIGATE_TO_CREATE_FEATURE } from 'utils/testIds';
 import { IFeaturesFilter } from 'hooks/useFeaturesFilter';
 import { useCreateFeaturePath } from 'component/feature/CreateFeatureButton/useCreateFeaturePath';
+import { useTranslation } from 'react-i18next';
 
 interface ICreateFeatureButtonProps {
     loading: boolean;
@@ -17,6 +18,7 @@ export const CreateFeatureButton = ({
     loading,
     filter,
 }: ICreateFeatureButtonProps) => {
+    const { t } = useTranslation()
     const smallScreen = useMediaQuery('(max-width:800px)');
     const createFeature = useCreateFeaturePath(filter);
 
@@ -28,7 +30,7 @@ export const CreateFeatureButton = ({
         <ConditionallyRender
             condition={smallScreen}
             show={
-                <Tooltip title="Create feature toggle" arrow>
+                <Tooltip title={`Create ${t('feature.singular')}`} arrow>
                     <IconButton
                         component={Link}
                         to={createFeature.path}
@@ -50,7 +52,7 @@ export const CreateFeatureButton = ({
                     disabled={!createFeature.access}
                     className={classnames({ skeleton: loading })}
                 >
-                    New feature toggle
+                    New {t('feature.singular')}
                 </Button>
             }
         />

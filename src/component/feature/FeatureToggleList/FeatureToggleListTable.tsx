@@ -20,6 +20,7 @@ import { CreateFeatureButton } from '../CreateFeatureButton/CreateFeatureButton'
 import { FeatureStaleCell } from './FeatureStaleCell/FeatureStaleCell';
 import { useSearch } from 'hooks/useSearch';
 import { Search } from 'component/common/Search/Search';
+import { useTranslation } from 'react-i18next';
 
 export const featuresPlaceholder: FeatureSchema[] = Array(15).fill({
     name: 'Name of the feature',
@@ -98,6 +99,7 @@ const { value: storedParams, setValue: setStoredParams } = createLocalStorage(
 );
 
 export const FeatureToggleListTable: VFC = () => {
+    const { t } = useTranslation();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
     const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
@@ -183,7 +185,7 @@ export const FeatureToggleListTable: VFC = () => {
             isLoading={loading}
             header={
                 <PageHeader
-                    title={`Feature toggles (${
+                    title={`${t('feature.plural_title')} (${
                         rows.length < data.length
                             ? `${rows.length} of ${data.length}`
                             : data.length
@@ -247,15 +249,15 @@ export const FeatureToggleListTable: VFC = () => {
                         condition={searchValue?.length > 0}
                         show={
                             <TablePlaceholder>
-                                No feature toggles found matching &ldquo;
+                                No {t('feature.plural')} found matching &ldquo;
                                 {searchValue}
                                 &rdquo;
                             </TablePlaceholder>
                         }
                         elseShow={
                             <TablePlaceholder>
-                                No feature toggles available. Get started by
-                                adding a new feature toggle.
+                                No {t('feature.plural')} available. Get started by
+                                adding a new {t('feature.singular')}.
                             </TablePlaceholder>
                         }
                     />

@@ -5,6 +5,7 @@ import GeneralSelect, {
     IGeneralSelectProps,
 } from 'component/common/GeneralSelect/GeneralSelect';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureProjectSelectProps
     extends Omit<IGeneralSelectProps, 'options'> {
@@ -20,6 +21,7 @@ const FeatureProjectSelect = ({
     filter,
     ...rest
 }: IFeatureProjectSelectProps) => {
+    const { t } = useTranslation()
     const { projects } = useProjects();
 
     if (!enabled) {
@@ -50,7 +52,7 @@ const FeatureProjectSelect = ({
 
     return (
         <GeneralSelect
-            label="Project"
+            label={t('project.plural_title')}
             options={options}
             value={value}
             onChange={onChange}

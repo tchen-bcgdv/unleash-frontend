@@ -4,6 +4,7 @@ import { IFeatureEnvironmentMetrics } from 'interfaces/featureToggle';
 import { calculatePercentage } from 'utils/calculatePercentage';
 import PercentageCircle from 'component/common/PercentageCircle/PercentageCircle';
 import { useStyles } from './FeatureOverviewEnvironmentMetrics.styles';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureOverviewEnvironmentMetrics {
     environmentMetric?: IFeatureEnvironmentMetrics;
@@ -14,6 +15,7 @@ const FeatureOverviewEnvironmentMetrics = ({
     environmentMetric,
     disabled = false,
 }: IFeatureOverviewEnvironmentMetrics) => {
+    const { t } = useTranslation()
     const { classes: styles } = useStyles();
     const theme = useTheme();
 
@@ -49,7 +51,7 @@ const FeatureOverviewEnvironmentMetrics = ({
                         }}
                         data-loading
                     >
-                        The feature has been requested <b>0 times</b> and
+                        The {t('feature.singular')} has been requested <b>0 times</b> and
                         exposed<b> 0 times</b> in the last hour
                     </p>
                 </div>
@@ -67,7 +69,7 @@ const FeatureOverviewEnvironmentMetrics = ({
             <div className={styles.info}>
                 <p className={styles.percentage}>{percentage}%</p>
                 <p className={styles.infoParagraph}>
-                    The feature has been requested{' '}
+                    The {t('feature.singular')} has been requested{' '}
                     <b>{environmentMetric.yes + environmentMetric.no} times</b>{' '}
                     and exposed <b>{environmentMetric.yes} times</b> in the last
                     hour

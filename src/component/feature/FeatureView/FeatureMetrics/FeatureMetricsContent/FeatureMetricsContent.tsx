@@ -5,6 +5,7 @@ import { Box, Typography } from '@mui/material';
 import theme from 'themes/theme';
 import { useId } from 'hooks/useId';
 import React, { Suspense } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IFeatureMetricsContentProps {
     metrics: IFeatureMetricsRaw[];
@@ -15,6 +16,7 @@ export const FeatureMetricsContent = ({
     metrics,
     hoursBack,
 }: IFeatureMetricsContentProps) => {
+    const { t } = useTranslation()
     const statsSectionId = useId();
     const tableSectionId = useId();
 
@@ -22,7 +24,7 @@ export const FeatureMetricsContent = ({
         return (
             <Box mt={6}>
                 <Typography variant="body1" paragraph>
-                    We have yet to receive any metrics for this feature toggle
+                    We have yet to receive any metrics for this {t('feature.singular')}
                     in the selected time period.
                 </Typography>
                 <Typography variant="body1" paragraph>

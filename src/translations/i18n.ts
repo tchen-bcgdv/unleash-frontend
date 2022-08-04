@@ -6,6 +6,7 @@ import { TRANSLATIONS_FL } from "./fl/translations";
 i18next
     .use(initReactI18next)
     .init({
+        fallbackLng: 'en',
         resources: {
             en: {
                 translation: TRANSLATIONS_EN

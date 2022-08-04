@@ -5,8 +5,10 @@ import useUiConfig from 'hooks/api/getters/useUiConfig/useUiConfig';
 import { useStyles } from 'component/feature/FeatureView/FeatureNotFound/FeatureNotFound.styles';
 import { useFeaturesArchive } from 'hooks/api/getters/useFeaturesArchive/useFeaturesArchive';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 export const FeatureNotFound = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const featureId = useRequiredPathParam('featureId');
     const { archivedFeatures } = useFeaturesArchive();
@@ -30,7 +32,7 @@ export const FeatureNotFound = () => {
     if (isArchived) {
         return (
             <p>
-                The feature{' '}
+                The {t('feature.singular')}{' '}
                 <strong className={styles.featureId}>{featureId}</strong> has
                 been archived. You can find it on the{' '}
                 <Link to={'/archive'}>archive page</Link>.
@@ -40,7 +42,7 @@ export const FeatureNotFound = () => {
 
     return (
         <p>
-            The feature{' '}
+            The {t('feature.singular')}{' '}
             <strong className={styles.featureId}>{featureId}</strong> does not
             exist. Would you like to{' '}
             <Link to={createFeatureTogglePath}>create it</Link>?

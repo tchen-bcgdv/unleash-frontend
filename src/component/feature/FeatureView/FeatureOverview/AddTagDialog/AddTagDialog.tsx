@@ -10,6 +10,7 @@ import useTags from 'hooks/api/getters/useTags/useTags';
 import useToast from 'hooks/useToast';
 import { formatUnknownError } from 'utils/formatUnknownError';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 interface IAddTagDialogProps {
     open: boolean;
@@ -24,6 +25,7 @@ interface IDefaultTag {
 }
 
 const AddTagDialog = ({ open, setOpen }: IAddTagDialogProps) => {
+    const { t } = useTranslation()
     const DEFAULT_TAG: IDefaultTag = { type: 'simple', value: '' };
     const { classes: styles } = useStyles();
     const featureId = useRequiredPathParam('featureId');
@@ -58,8 +60,8 @@ const AddTagDialog = ({ open, setOpen }: IAddTagDialogProps) => {
             refetch();
             setToastData({
                 type: 'success',
-                title: 'Added tag to toggle',
-                text: 'We successfully added a tag to your toggle',
+                title: `Added tag to ${t('feature.singular')}`,
+                text: `We successfully added a tag to your ${t('feature.singular')}`,
                 confetti: true,
             });
         } catch (error: unknown) {
@@ -76,7 +78,7 @@ const AddTagDialog = ({ open, setOpen }: IAddTagDialogProps) => {
                 open={open}
                 secondaryButtonText="Cancel"
                 primaryButtonText="Add tag"
-                title="Add tags to feature toggle"
+                title={`Add tags to ${t('feature.singular')}`}
                 onClick={onSubmit}
                 disabledPrimaryButton={loading}
                 onClose={onCancel}
@@ -84,7 +86,7 @@ const AddTagDialog = ({ open, setOpen }: IAddTagDialogProps) => {
             >
                 <>
                     <Typography paragraph>
-                        Tags allow you to group features together
+                        Tags allow you to group {t('feature.plural')} together
                     </Typography>
                     <form id={formId} onSubmit={onSubmit}>
                         <section className={styles.dialogFormContent}>

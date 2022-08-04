@@ -11,8 +11,10 @@ import {
 } from 'component/feature/FeatureStrategy/FeatureStrategyEdit/FeatureStrategyEdit';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
 import { usePageTitle } from 'hooks/usePageTitle';
+import { useTranslation } from 'react-i18next';
 
 const FeatureOverview = () => {
+    const { t } = useTranslation()
     const { classes: styles } = useStyles();
     const navigate = useNavigate();
     const projectId = useRequiredPathParam('projectId');
@@ -35,7 +37,7 @@ const FeatureOverview = () => {
                     path="strategies/create"
                     element={
                         <SidebarModal
-                            label="Create feature strategy"
+                            label={`Create ${t('feature.singular')} strategy`}
                             onClose={onSidebarClose}
                             open
                         >
@@ -47,7 +49,7 @@ const FeatureOverview = () => {
                     path="strategies/edit"
                     element={
                         <SidebarModal
-                            label="Edit feature strategy"
+                            label={`Edit ${t('feature.singular')} strategy`}
                             onClose={onSidebarClose}
                             open
                         >
