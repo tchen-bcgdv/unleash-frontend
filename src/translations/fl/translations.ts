@@ -4,7 +4,8 @@ export const TRANSLATIONS_FL= {
         singular: 'campaign',
         singular_title: 'Campaign',
         plural: 'campaigns',
-        plural_title: 'Campaigns'
+        plural_title: 'Campaigns',
+        id: 'Campaign ID'
     },
     feature: {
         singular: 'experiment',

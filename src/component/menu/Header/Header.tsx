@@ -121,7 +121,7 @@ const Header: VFC = () => {
                 <nav className={styles.nav}>
                     <div className={styles.links}>
                         <Link to="/projects" className={themeStyles.focusable}>
-                            Projects
+                            { t('project.plural_title')}
                         </Link>
                         <Link to="/features" className={themeStyles.focusable}>
                             { t('feature.plural_title')}

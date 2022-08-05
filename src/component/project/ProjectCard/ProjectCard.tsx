@@ -19,6 +19,7 @@ import { formatUnknownError } from 'utils/formatUnknownError';
 import AccessContext from 'contexts/AccessContext';
 import { DEFAULT_PROJECT_ID } from 'hooks/api/getters/useDefaultProject/useDefaultProjectId';
 import useUiConfig from 'hooks/api/getters/useUiConfig/useUiConfig';
+import { useTranslation } from 'react-i18next';
 
 interface IProjectCardProps {
     name: string;
@@ -37,6 +38,7 @@ export const ProjectCard = ({
     onHover,
     id,
 }: IProjectCardProps) => {
+    const { t } = useTranslation();
     const { classes } = useStyles();
     const { hasAccess } = useContext(AccessContext);
     const { isOss } = useUiConfig();
@@ -59,9 +61,9 @@ export const ProjectCard = ({
             await deleteProject(id);
             refetchProjectOverview();
             setToastData({
-                title: 'Deleted project',
+                title: `Deleted ${t('project.singular')}`,
                 type: 'success',
-                text: 'Successfully deleted project',
+                text: `Successfully deleted ${t('project.singular')}`,
             });
         } catch (e: unknown) {
             setToastApiError(formatUnknownError(e));
@@ -123,8 +125,8 @@ export const ProjectCard = ({
                     >
                         <Delete className={classes.icon} />
                         {id === DEFAULT_PROJECT_ID && !canDeleteProject
-                            ? "You can't delete the default project"
-                            : 'Delete project'}
+                            ? `You can't delete the default ${t('project.singular')}`
+                            : `Delete ${t('project.singular')}`}
                     </MenuItem>
                 </Menu>
             </div>
@@ -160,7 +162,7 @@ export const ProjectCard = ({
                     setAnchorEl(null);
                     setShowDelDialog(false);
                 }}
-                title="Really delete project"
+                title={`Really delete ${t('project.singular')}`}
             />
         </Card>
     );

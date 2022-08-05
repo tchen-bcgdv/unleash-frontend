@@ -26,6 +26,7 @@ import { FeatureArchivedCell } from './FeatureArchivedCell/FeatureArchivedCell';
 import { useSearchParams } from 'react-router-dom';
 import { ArchivedFeatureDeleteConfirm } from './ArchivedFeatureActionCell/ArchivedFeatureDeleteConfirm/ArchivedFeatureDeleteConfirm';
 import { IFeatureToggle } from 'interfaces/featureToggle';
+import { useTranslation } from 'react-i18next';
 
 export interface IFeaturesArchiveTableProps {
     archivedFeatures: FeatureSchema[];
@@ -50,6 +51,7 @@ export const ArchiveTable = ({
     title,
     projectId,
 }: IFeaturesArchiveTableProps) => {
+    const { t } = useTranslation();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
     const isMediumScreen = useMediaQuery(theme.breakpoints.down('lg'));
     const { setToastData, setToastApiError } = useToast();
@@ -72,7 +74,7 @@ export const ArchiveTable = ({
                 setToastData({
                     type: 'success',
                     title: "And we're back!",
-                    text: 'The feature toggle has been revived.',
+                    text: `The ${t('feature.singular')} has been revived.`,
                 });
             } catch (e: unknown) {
                 setToastApiError(formatUnknownError(e));
@@ -130,7 +132,7 @@ export const ArchiveTable = ({
             ...(!projectId
                 ? [
                       {
-                          Header: 'Project ID',
+                          Header: t('project.id'),
                           accessor: 'project',
                           sortType: 'alphanumeric',
                           filterName: 'project',
@@ -287,13 +289,13 @@ export const ArchiveTable = ({
                         condition={searchValue?.length > 0}
                         show={
                             <TablePlaceholder>
-                                No feature toggles found matching &ldquo;
+                                No {t('feature.plural')} found matching &ldquo;
                                 {searchValue}&rdquo;
                             </TablePlaceholder>
                         }
                         elseShow={
                             <TablePlaceholder>
-                                None of the feature toggles were archived yet.
+                                None of the {t('feature.plural')} were archived yet.
                             </TablePlaceholder>
                         }
                     />

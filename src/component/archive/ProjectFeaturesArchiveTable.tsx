@@ -2,6 +2,7 @@ import { ArchiveTable } from './ArchiveTable/ArchiveTable';
 import { SortingRule } from 'react-table';
 import { useProjectFeaturesArchive } from 'hooks/api/getters/useProjectFeaturesArchive/useProjectFeaturesArchive';
 import { createLocalStorage } from 'utils/createLocalStorage';
+import { useTranslation } from 'react-i18next';
 
 const defaultSort: SortingRule<string> = { id: 'archivedAt' };
 
@@ -12,6 +13,7 @@ interface IProjectFeaturesTable {
 export const ProjectFeaturesArchiveTable = ({
     projectId,
 }: IProjectFeaturesTable) => {
+    const { t } = useTranslation();
     const {
         archivedFeatures = [],
         refetchArchived,
@@ -25,7 +27,7 @@ export const ProjectFeaturesArchiveTable = ({
 
     return (
         <ArchiveTable
-            title="Project archive"
+            title={`${t('project.singular_title')} archive`}
             archivedFeatures={archivedFeatures}
             loading={loading}
             storedParams={value}

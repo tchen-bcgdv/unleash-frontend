@@ -16,6 +16,7 @@ import {
     AccordionSummary,
 } from '@mui/material';
 import { UPDATE_PROJECT } from 'component/providers/AccessProvider/permissions';
+import { useTranslation } from 'react-i18next';
 
 interface IProjectInfoProps {
     id: string;
@@ -31,6 +32,7 @@ const ProjectInfo = ({
     health,
     description,
 }: IProjectInfoProps) => {
+    const { t } = useTranslation();
     const { classes: themeStyles } = useThemeStyles();
     const { classes: styles } = useStyles();
     const { uiConfig, isOss } = useUiConfig();
@@ -122,7 +124,7 @@ const ProjectInfo = ({
                         />
                     </div>
                     <div className={styles.idContainer}>
-                        <p>projectId: {id}</p>
+                        <p>{t('project.id')}: {id}</p>
                     </div>
                 </div>
 
@@ -160,7 +162,7 @@ const ProjectInfo = ({
                     style={{ marginBottom: '0' }}
                 >
                     <p className={styles.subtitle} data-loading>
-                        Project members
+                        {t('project.singular_title')} members
                     </p>
                     <p data-loading className={styles.emphazisedText}>
                         {memberCount}

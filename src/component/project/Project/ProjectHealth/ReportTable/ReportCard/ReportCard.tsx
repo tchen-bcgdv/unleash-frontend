@@ -4,6 +4,7 @@ import ReportProblemOutlinedIcon from '@mui/icons-material/ReportProblemOutlined
 import { ConditionallyRender } from 'component/common/ConditionallyRender/ConditionallyRender';
 import ReactTimeAgo from 'react-timeago';
 import { IProjectHealthReport } from 'interfaces/project';
+import { useTranslation } from 'react-i18next';
 
 const StyledBoxActive = styled(Box)(({ theme }) => ({
     display: 'flex',
@@ -68,6 +69,7 @@ interface IReportCardProps {
 }
 
 export const ReportCard = ({ healthReport }: IReportCardProps) => {
+    const { t } = useTranslation();
     const healthRatingColor =
         healthReport.health < 50
             ? 'error.main'
@@ -78,14 +80,14 @@ export const ReportCard = ({ healthReport }: IReportCardProps) => {
     const renderActiveToggles = () => (
         <StyledBoxActive>
             <CheckIcon />
-            <span>{healthReport.activeCount} active toggles</span>
+            <span>{healthReport.activeCount} active {t('feature.plural')}</span>
         </StyledBoxActive>
     );
 
     const renderStaleToggles = () => (
         <StyledBoxStale>
             <ReportProblemOutlinedIcon />
-            <span>{healthReport.staleCount} stale toggles</span>
+            <span>{healthReport.staleCount} stale {t('feature.plural')}</span>
         </StyledBoxStale>
     );
 
@@ -93,7 +95,7 @@ export const ReportCard = ({ healthReport }: IReportCardProps) => {
         <StyledBoxStale>
             <ReportProblemOutlinedIcon />
             <span>
-                {healthReport.potentiallyStaleCount} potentially stale toggles
+                {healthReport.potentiallyStaleCount} potentially stale {t('feature.plural')}
             </span>
         </StyledBoxStale>
     );
@@ -123,7 +125,7 @@ export const ReportCard = ({ healthReport }: IReportCardProps) => {
                 />
             </Box>
             <Box>
-                <StyledHeader>Toggle report</StyledHeader>
+                <StyledHeader>{t('feature.singular_title')} report</StyledHeader>
                 <StyledList>
                     <li>
                         <ConditionallyRender
@@ -135,7 +137,7 @@ export const ReportCard = ({ healthReport }: IReportCardProps) => {
                         condition={Boolean(healthReport.activeCount)}
                         show={
                             <StyledAlignedItem>
-                                Also includes potentially stale toggles.
+                                Also includes potentially stale {t('feature.plural')}.
                             </StyledAlignedItem>
                         }
                     />
@@ -164,8 +166,8 @@ export const ReportCard = ({ healthReport }: IReportCardProps) => {
                     condition={Boolean(healthReport.potentiallyStaleCount)}
                     show={
                         <StyledAlignedItem>
-                            Review your feature toggles and delete unused
-                            toggles.
+                            Review your {t('feature.plural')} and delete unused
+                            {t('feature.plural')}.
                         </StyledAlignedItem>
                     }
                     elseShow={

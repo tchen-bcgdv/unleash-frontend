@@ -10,8 +10,10 @@ import useUiConfig from 'hooks/api/getters/useUiConfig/useUiConfig';
 import useToast from 'hooks/useToast';
 import { formatUnknownError } from 'utils/formatUnknownError';
 import { GO_BACK } from 'constants/navigate';
+import { useTranslation } from 'react-i18next';
 
 const CreateProject = () => {
+    const { t } = useTranslation();
     const { setToastData, setToastApiError } = useToast();
     const { refetchUser } = useAuthUser();
     const { uiConfig } = useUiConfig();
@@ -45,8 +47,8 @@ const CreateProject = () => {
                 refetchUser();
                 navigate(`/projects/${projectId}`);
                 setToastData({
-                    title: 'Project created',
-                    text: 'Now you can add toggles to this project',
+                    title: `${t('project.singular_title')} created`,
+                    text: `Now you can add ${t('feature.plural')} to this project`,
                     confetti: true,
                     type: 'success',
                 });
@@ -72,10 +74,10 @@ const CreateProject = () => {
     return (
         <FormTemplate
             loading={loading}
-            title="Create project"
-            description="Projects allows you to group feature toggles together in the management UI."
+            title={`Create ${t('project.singular')}`}
+            description={`${t('project.plural_title')} allow you to group ${t('feature.plural')} together in the management UI.`}
             documentationLink="https://docs.getunleash.io/user_guide/projects"
-            documentationLinkLabel="Projects documentation"
+            documentationLinkLabel={`${t('project.plural_title')} documentation`}
             formatApiCode={formatApiCode}
         >
             <ProjectForm
@@ -92,7 +94,7 @@ const CreateProject = () => {
                 clearErrors={clearErrors}
                 validateProjectId={validateProjectId}
             >
-                <CreateButton name="project" permission={CREATE_PROJECT} />
+                <CreateButton name={t('project.singular')} permission={CREATE_PROJECT} />
             </ProjectForm>
         </FormTemplate>
     );

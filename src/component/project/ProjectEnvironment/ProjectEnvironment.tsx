@@ -22,11 +22,13 @@ import StringTruncator from 'component/common/StringTruncator/StringTruncator';
 import { useThemeStyles } from 'themes/themeStyles';
 import { usePageTitle } from 'hooks/usePageTitle';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
+import { useTranslation } from 'react-i18next';
 
 const ProjectEnvironmentList = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const projectName = useProjectNameOrId(projectId);
-    usePageTitle(`Project environments – ${projectName}`);
+    usePageTitle(`${t('project.singular_title')} environments – ${projectName}`);
 
     // api state
     const [envs, setEnvs] = useState<IProjectEnvironment[]>([]);
@@ -85,7 +87,7 @@ const ProjectEnvironmentList = () => {
             }
             setToastData({
                 title: 'One environment must be active',
-                text: 'You must always have at least one active environment per project',
+                text: `You must always have at least one active environment per ${t('project.singular')}`,
                 type: 'error',
             });
         } else {
@@ -93,7 +95,7 @@ const ProjectEnvironmentList = () => {
                 await addEnvironmentToProject(projectId, env.name);
                 setToastData({
                     title: 'Environment enabled',
-                    text: 'Environment successfully enabled. You can now use it to segment strategies in your feature toggles.',
+                    text: `Environment successfully enabled. You can now use it to segment strategies in your ${t('feature.plural')}.`,
                     type: 'success',
                 });
             } catch (error) {
@@ -178,7 +180,7 @@ const ProjectEnvironmentList = () => {
         <PageContent
             header={
                 <PageHeader
-                    titleElement={`Configure environments for "${project?.name}" project`}
+                    titleElement={`Configure environments for "${project?.name}" ${t('project.singular')}`}
                 />
             }
             isLoading={loading}

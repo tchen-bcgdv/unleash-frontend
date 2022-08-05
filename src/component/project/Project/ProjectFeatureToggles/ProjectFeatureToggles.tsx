@@ -36,6 +36,7 @@ import { FeatureArchiveDialog } from 'component/common/FeatureArchiveDialog/Feat
 import { useSearch } from 'hooks/useSearch';
 import { useMediaQuery } from '@mui/material';
 import { Search } from 'component/common/Search/Search';
+import { useTranslation } from 'react-i18next';
 
 interface IProjectFeatureTogglesProps {
     features: IProject['features'];
@@ -66,6 +67,7 @@ export const ProjectFeatureToggles = ({
     loading,
     environments: newEnvironments = [],
 }: IProjectFeatureTogglesProps) => {
+    const { t } = useTranslation();
     const { classes: styles } = useStyles();
     const theme = useTheme();
     const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
@@ -138,8 +140,8 @@ export const ProjectFeatureToggles = ({
 
             setToastData({
                 type: 'success',
-                title: 'Updated toggle status',
-                text: 'Successfully updated toggle status.',
+                title: `Updated ${t('feature.singular')} status`,
+                text: `Successfully updated ${t('feature.singular')} status.`,
             });
             refetch();
         },
@@ -277,7 +279,7 @@ export const ProjectFeatureToggles = ({
         if (loading) {
             return Array(6).fill({
                 type: '-',
-                name: 'Feature name',
+                name: `${t('feature.singular_title')} name`,
                 createdAt: new Date(),
                 environments: {
                     production: { name: 'production', enabled: false },
@@ -389,7 +391,7 @@ export const ProjectFeatureToggles = ({
             header={
                 <PageHeader
                     className={styles.title}
-                    titleElement={`Feature toggles (${rows.length})`}
+                    titleElement={`${t('feature.plural_title')} (${rows.length})`}
                     actions={
                         <>
                             <ConditionallyRender
@@ -427,7 +429,7 @@ export const ProjectFeatureToggles = ({
                                 permission={CREATE_FEATURE}
                                 className={styles.button}
                             >
-                                New feature toggle
+                                New {t('feature.singular')}
                             </ResponsiveButton>
                         </>
                     }
@@ -460,15 +462,15 @@ export const ProjectFeatureToggles = ({
                         condition={searchValue?.length > 0}
                         show={
                             <TablePlaceholder>
-                                No feature toggles found matching &ldquo;
+                                No {t('feature.plural')} found matching &ldquo;
                                 {searchValue}
                                 &rdquo;
                             </TablePlaceholder>
                         }
                         elseShow={
                             <TablePlaceholder>
-                                No feature toggles available. Get started by
-                                adding a new feature toggle.
+                                No {t('feature.plural')} available. Get started by
+                                adding a new {t('feature.singular')}.
                             </TablePlaceholder>
                         }
                     />

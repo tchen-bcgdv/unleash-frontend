@@ -4,7 +4,8 @@ export const TRANSLATIONS_EN = {
         singular: 'project',
         singular_title: 'Project',
         plural: 'projects',
-        plural_title: 'Projects'
+        plural_title: 'Projects',
+        id: 'Project ID'
     },
     feature: {
         singular: 'feature toggle',

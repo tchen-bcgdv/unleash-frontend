@@ -22,6 +22,7 @@ import {
     DELETE_FEATURE,
     UPDATE_FEATURE,
 } from 'component/providers/AccessProvider/permissions';
+import { useTranslation } from 'react-i18next';
 
 interface IActionsCellProps {
     projectId: string;
@@ -41,6 +42,7 @@ export const ActionsCell: VFC<IActionsCellProps> = ({
     onOpenArchiveDialog,
     onOpenStaleDialog,
 }) => {
+    const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const { classes } = useStyles();
     const {
@@ -59,7 +61,7 @@ export const ActionsCell: VFC<IActionsCellProps> = ({
 
     return (
         <Box className={classes.cell}>
-            <Tooltip title="Feature toggle actions" arrow describeChild>
+            <Tooltip title={`${t('feature.singular_title')} actions`} arrow describeChild>
                 <IconButton
                     id={id}
                     aria-controls={open ? menuId : undefined}

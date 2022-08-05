@@ -6,11 +6,13 @@ import { ReportCard } from './ReportTable/ReportCard/ReportCard';
 import { ReportTable } from './ReportTable/ReportTable';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
 import { useProjectNameOrId } from 'hooks/api/getters/useProject/useProject';
+import { useTranslation } from 'react-i18next';
 
 const ProjectHealth = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const projectName = useProjectNameOrId(projectId);
-    usePageTitle(`Project health – ${projectName}`);
+    usePageTitle(`${t('project.singular_title')} health – ${projectName}`);
 
     const { healthReport, refetchHealthReport, error } = useHealthReport(
         projectId,

@@ -19,8 +19,10 @@ import { UPDATE_PROJECT } from 'component/providers/AccessProvider/permissions';
 import { useRequiredPathParam } from 'hooks/useRequiredPathParam';
 import useUiConfig from 'hooks/api/getters/useUiConfig/useUiConfig';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Project = () => {
+    const { t } = useTranslation();
     const projectId = useRequiredPathParam('projectId');
     const params = useQueryParams();
     const { project, error, loading, refetch } = useProject(projectId);
@@ -70,7 +72,7 @@ const Project = () => {
         const edited = params.get('edited');
 
         if (created || edited) {
-            const text = created ? 'Project created' : 'Project updated';
+            const text = created ? `${t('project.singular_title')} created` : `${t('project.singular_title')} updated`;
             setToastData({
                 type: 'success',
                 title: text,
@@ -95,7 +97,7 @@ const Project = () => {
                             onClick={() =>
                                 navigate(`/projects/${projectId}/edit`)
                             }
-                            tooltipProps={{ title: 'Edit project' }}
+                            tooltipProps={{ title: `Edit ${t('project.singular')}` }}
                             data-loading
                         >
                             <Edit />
@@ -109,7 +111,7 @@ const Project = () => {
                             data-loading
                             style={{ maxWidth: '400px', margin: '1rem' }}
                             onClick={refetch}
-                            text="Could not fetch project"
+                            text={`Could not fetch ${t('project.singular')}`}
                         />
                     }
                 />
